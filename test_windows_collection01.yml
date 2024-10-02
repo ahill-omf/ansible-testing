@@ -1,0 +1,9 @@
+---
+- name: Test ansible windows collection
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install PSCX
+      ansible.windows.win_psmodule:
+          name: Pscx
+          state: present

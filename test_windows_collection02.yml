@@ -1,0 +1,9 @@
+---
+- name: Test community windows collection
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install PSCX
+      community.windows.win_psmodule:
+          name: Pscx
+          state: present
