@@ -11,20 +11,13 @@
       3932363431623138390a373037313832313437326365336333373134646562346232643434613964
       63303434316265333133363039333036313363633564633462613432623962303663
   tasks:
-    - name: Print pass
-      ansible.builtin.debug:
-        var: sva_pass
     - name: Create a mapped drive that requires authentication
       community.windows.win_mapped_drive:
         letter: M
         path: \\corp.fin\shared
         state: present
-        username: t2222009-sva@CORP.FIN
-        password: "{{ sva_pass | string }}"
-      # become: true
-      # become_method: runas
-      # become_user: t2222009-sva@CORP.FIN
-      # become_password: "{{ sva_pass | string }}"
+        # username: t2222009-sva@CORP.FIN
+        # password: "{{ sva_pass | string }}"
       vars:
         # become is required to save and retrieve the credentials in the tasks
         ansible_become: true
