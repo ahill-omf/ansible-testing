@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: false
   vars:
-    pass: !vault |
+    sva_pass: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       36373130653638303239636161363935633763346261613131306332306137656666376237363165
       3665313731316233363466366638653238363665643664640a383037633663303931396432656564
@@ -13,15 +13,21 @@
   tasks:
     - name: Print pass
       ansible.builtin.debug:
-        var: pass
+        var: sva_pass
     - name: Create a mapped drive that requires authentication
       community.windows.win_mapped_drive:
         letter: M
         path: \\corp.fin\shared
         state: present
         username: t2222009-sva@CORP.FIN
-        password: "{{ pass | string }}"
+        password: "{{ sva_pass | string }}"
       become: true
       become_method: runas
       become_user: t2222009-sva@CORP.FIN
-      become_password: "{{ pass | string }}"
+      become_password: "{{ sva_pass | string }}"
+      vars:
+        # become is required to save and retrieve the credentials in the tasks
+        ansible_become: true
+        ansible_become_method: runas
+        ansible_become_user: t2222009-sva@CORP.FIN
+        ansible_become_pass: '{{ sva_pass | string }}'
