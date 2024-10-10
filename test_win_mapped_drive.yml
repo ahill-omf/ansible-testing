@@ -22,5 +22,5 @@
         # become is required to save and retrieve the credentials in the tasks
         ansible_become: true
         ansible_become_method: runas
-        ansible_become_user: '{{ ansible_user }}'
+        ansible_become_user: t2222009-sva@CORP.FIN
         ansible_become_pass: '{{ sva_pass | string }}'
