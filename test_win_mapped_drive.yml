@@ -29,3 +29,4 @@
         src: M:\Data Center Infrastructure\new.zip
         dest: C:\temp\new.zip
         remote_src: true
+        force: true
