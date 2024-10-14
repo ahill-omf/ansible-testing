@@ -11,22 +11,32 @@
       3964333435313134610a356430666162333865623536396238616234396365313636616263306635
       36656334663763616566646135363534396331303539366162663161336136393030
   tasks:
-    - name: Create a mapped drive that requires authentication
-      community.windows.win_mapped_drive:
-        letter: M
-        path: \\corp.fin\shared
-        state: present
-        # username: t2222009-sva@CORP.FIN
-        # password: "{{ sva_pass | string }}"
+    # - name: Create a mapped drive that requires authentication
+    #   community.windows.win_mapped_drive:
+    #     letter: M
+    #     path: \\corp.fin\shared
+    #     state: present
+    #     # username: t2222009-sva@CORP.FIN
+    #     # password: "{{ sva_pass | string }}"
+    #   vars:
+    #     # become is required to save and retrieve the credentials in the tasks
+    #     ansible_become: true
+    #     ansible_become_method: runas
+    #     ansible_become_user: t2222009-sva@CORP.FIN
+    #     ansible_become_pass: '{{ sva_pass | string }}'
+    # - name: Copy files
+    #   ansible.windows.win_copy:
+    #     src: \\corp.fin\shared\Data Center In
+    #     dest: C:\temp\new.zip
+    #     remote_src: true
+    #     force: true
+    - win_copy:
+        src: \\corp.fin\shared\Data Center Infrastructure\new.zip
+        dest: C:\temp\new.zip
+        remote_src: yes
+      become: yes
+      become_method: runas
+      become_flags: logon_type=new_credential logon_flags=netcredentials_only
       vars:
-        # become is required to save and retrieve the credentials in the tasks
-        ansible_become: true
-        ansible_become_method: runas
         ansible_become_user: t2222009-sva@CORP.FIN
         ansible_become_pass: '{{ sva_pass | string }}'
-    - name: Copy files
-      ansible.windows.win_copy:
-        src: C:\temp\omf\new.zip
-        dest: C:\temp\new.zip
-        remote_src: true
-        force: true
