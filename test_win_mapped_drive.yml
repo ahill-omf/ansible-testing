@@ -40,3 +40,9 @@
       vars:
         ansible_become_user: t2222009-sva@CORP.FIN
         ansible_become_pass: '{{ sva_pass | string }}'
+    - community.windows.win_unzip:
+        src: C:\temp\new.zip
+        dest: C:\temp\new-folder
+        creates: C:\temp\new-folder
+        delete_archive: true
+
