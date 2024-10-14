@@ -26,7 +26,7 @@
         ansible_become_pass: '{{ sva_pass | string }}'
     - name: Copy files
       ansible.windows.win_copy:
-        src: M:\Data Center Infrastructure\new.zip
+        src: C:\temp\omf\new.zip
         dest: C:\temp\new.zip
         remote_src: true
         force: true
