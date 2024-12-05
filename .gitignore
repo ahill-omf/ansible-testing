@@ -1,7 +1,4 @@
 .vscode/settings.json
 ansible.cfg
 vaultpass
-/bin/*
-/lib/*
-/lib64/*
-pyvenv.cfg
+/venv/

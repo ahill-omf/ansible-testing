@@ -1,0 +1,22 @@
+---
+- name: VMware_tasks
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ../../secrets.yml
+  vars:
+    vcenter_host: evlabvc01.corp.fin
+    vcenter_user: T2222009-SVA
+    target: "HQESLAPP01A 11-19 21:46 1"
+    validate_certs: false
+  tasks:
+    - name: "Check if VM exists {{ target }}"
+      vmware.vmware_rest.vcenter_vm_info:
+        vcenter_hostname: "{{ vcenter_host }}"
+        vcenter_username: "{{ vcenter_user }}"
+        vcenter_password: "{{ sva_pwd | string }}"
+        vcenter_validate_certs: "{{ validate_certs }}"
+        filter_names:
+          - "{{ target | upper }}"
+      register: vm_found
+      delegate_to: localhost
