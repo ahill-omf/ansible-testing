@@ -5,10 +5,8 @@
   vars_files:
     - ../../secrets.yml
   vars:
-    # vcenter_host: evlabvc01.corp.fin
-    vcenter_host: evvc.corp.fin
+    vcenter_host: evvcsslb.corp.fin
     vcenter_user: T2222009-SVA
-    # target: "HQESLAPP01A 11-19 21:46 1"
     target: "EVDCIJUMP04"
     validate_certs: false
   tasks:
