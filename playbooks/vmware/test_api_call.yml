@@ -5,11 +5,16 @@
   vars_files:
     - ../../secrets.yml
   vars:
-    vcenter_host: evlabvc01.corp.fin
+    # vcenter_host: evlabvc01.corp.fin
+    vcenter_host: evvc.corp.fin
     vcenter_user: T2222009-SVA
-    target: "HQESLAPP01A 11-19 21:46 1"
+    # target: "HQESLAPP01A 11-19 21:46 1"
+    target: "EVDCIJUMP04"
     validate_certs: false
   tasks:
+    - name: Print
+      ansible.builtin.debug:
+        var: ansible_all_ipv4_addresses
     - name: "Check if VM exists {{ target }}"
       vmware.vmware_rest.vcenter_vm_info:
         vcenter_hostname: "{{ vcenter_host }}"
