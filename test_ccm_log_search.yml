@@ -1,0 +1,20 @@
+---
+- name: Test CCM Log search
+  hosts: localhost
+  gather_facts: false
+  vars:
+    search_string: 'SMSSITECODE="CM1"'
+    search_file: files/ccmsetup-ccmeval.log
+  tasks:
+    - name: SCCM | Check CCMEval log for site code
+      ansible.builtin.slurp:
+        src: "{{ search_file }}"
+      register: search_content
+
+    - name: Print returned information
+      ansible.builtin.set_fact:
+        log_itemized: "{{ (search_content['content'] | b64decode | regex_replace('\\r\\n', '\\n') | split('\n'))[-2:] }}"
+
+    - name: Print returned information
+      ansible.builtin.debug:
+        msg: "{{ log_itemized }}"
